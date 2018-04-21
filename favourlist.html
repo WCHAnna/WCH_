@@ -1,0 +1,519 @@
+<!DOCTYPE HTML>
+<!--
+	Iridium by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+			
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/skelnoscript.css" />
+	<link rel="stylesheet" type="text/css" href="css/styledesktop.css" />
+	<link rel="stylesheet" type="text/css" href="css/stylemobile.css" />
+	<link rel="stylesheet" type="text/css" href="css/style1000px.css" />
+	<link rel="stylesheet" type="text/css" href="css/ie/v8.css" />
+	<link rel="stylesheet" type="text/css" href="css/ie/v9.css" />
+	<head>
+		
+		<title>Drug Abuse Information</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/1skelmin.js"></script>
+		<script src="js/2skelpanelsmin.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	
+		<script>
+  function checkLoginStatus(){
+		//alert("checkLoginStatus");
+		$.ajax({
+				 url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/checkLoginStatus", 
+         type: 'GET',
+				 async: false,
+				 dataType: 'text',
+				 success: function(data){;
+					 if (data !== ""){					  
+					   $('#name').empty().append(data);
+						 $('#btn_signin').hide();
+					   $('#btn_signup').hide()
+						 $('#logout').show();
+						 $('#favourList').show();
+						 checkFavourList();
+					 }else{
+						 $('#btn_signin').show();
+						 $('#btn_signup').show();
+						 $('#logout').hide();
+						 $('#favourList').hide();
+					 }
+				 },
+				error: function (xhr, textStatus, errorThrown) {
+          alert("error");
+					alert(xhr.responseText);
+				},	 
+	  });
+	}
+	</script>
+	
+  					 
+  
+	<script>
+    var storeLinkarray = [0];
+    var storeArticleName = [0];
+		function checkFavourList(){
+			$.ajax({
+				 url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/checkFavourList", 
+         type: 'GET',
+				 async: false,
+				// dataType: 'json',
+				// jsonpCallback: '_wrapper',
+				 success: function(data){
+					 //alert(data);
+				   //alert(JSON.stringify(data));
+					 var _stringObj = JSON.stringify(data);
+					 var stringObj = JSON.parse(data);
+
+					 if(stringObj.Msg != "Favour List is empty!"){
+             
+             var link = document.getElementsByClassName('tablink');
+						  for(i=0; i<stringObj.length; i++){                
+							 //Before awitch page, need to separate the html from json. Because it includes ""
+               var htmlstring1, htmlstring2;							 
+							 htmlstring1 =  JSON.stringify(stringObj[i].html);
+							 htmlstring2 = htmlstring1.split('"');  
+               storeLinkarray[i] = htmlstring2[1];
+               storeArticleName[i] = stringObj[i].ArticleName;
+               var htmlstring3 = "/" + htmlstring2[1];              
+							 var num = i+1;
+							 document.getElementsByClassName("tabnum")[i].innerHTML = num;
+							 document.getElementsByClassName("tabname")[i].innerHTML = stringObj[i].ArticleName;
+							 document.getElementsByClassName("tablink")[i].innerHTML = "Click me";
+							 document.getElementsByClassName("tabdel")[i].innerHTML = "Delete";
+							 /*document.getElementsByClassName("tablink")[i].onclick = function(){
+							 //window.location.href =  htmlstring2[1];
+                 //alert(htmlstring2[1]);  
+               };*/	
+						 }
+					 }else{
+						
+					 }
+				 },
+				 error: function (xhr, textStatus, errorThrown) {
+         alert("error");
+			 	 alert(xhr.responseText);
+				},	 
+		});
+      
+      //Click button to change page Or delete favourite article
+      //Should do ir outside the for loop because it will always ren the last column of the forloop
+
+      $( ".tablink" ).each(function( index ) {
+        //console.log( index + ": " + $( this ).text() );
+       if($(this).text() == "Click me"){
+         $(this).html('<a href="/'+storeLinkarray[index]+'">Click</a>');
+       }
+     });
+               
+      $(".tabdel").each(function(index){
+         if($(this).text() == "Delete"){
+           $(this).html('<a href="">Delete</a>');
+           var delArticleName = storeArticleName[index];
+           //console.log( index + ": " + $( this ).text() );
+           $(this).click(function(){
+             //alert("clickdel");
+           $.ajax({
+											url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/DeleteFavour", 
+       							 	type: 'POST',
+				 							async: false,
+				 							dataType: 'text',
+											data: delArticleName,
+											success: function(data){
+										   if (data == "Deleted successfully!"){
+												alert("Deleted!");
+										    window.location.href =  'favourlist.html';
+											 }
+											},
+											error: function (xhr, textStatus, errorThrown) {
+       							 			alert("error");
+			 	 									alert(xhr.responseText);
+											},
+						   });
+             });
+         }
+      });
+		}
+   
+	</script>
+	
+	<script>
+	$(document).ready(function(){
+		$('#logout').click(function(){
+			//alert("clicked logout!");
+			$.ajax({
+				 url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/Logout", 
+         type: 'GET',
+				 async: false,
+				 dataType: 'text',
+				 //jsonpCallback: '_wrapper',
+				 //contentType: 'application/json',        
+				 //dataFilter: function(data) { return data; },
+				 success: function(data){
+				  alert(data);
+					  window.location.href='index.html';
+					$('#name').empty().append("");
+					$('#btn_signin').show();
+				  $('#btn_signup').show();
+					$('#logout').hide();
+					$('#favourList').hide();
+				 },
+			  	complete: function () {
+        // Handle the complete event
+          //alert("ajax completed ");
+        },
+				error: function (xhr, textStatus, errorThrown) {
+          alert("error");
+					alert(xhr.responseText);
+				},	 
+	  });
+		});
+	});
+	</script>
+	
+  <script>
+	$(document).ready(function(){			
+		$("#clear").click(function(){
+    //alert("Delete all");
+    $.ajax(
+    {
+      url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/ClearFavour", 
+      type: 'POST',
+			
+			 success: function(data){   
+				 if(data == "Delete successfully!"){
+             alert(data);
+             window.location.href =  'favourlist.html';
+         }else{
+           alert(data);
+         }
+         
+			 },
+			error: function (xhr, textStatus, errorThrown) {
+          //alert(textStatus);
+				  //alert(xhr.responseText);
+          console.log(textStatus);
+				},	 
+    });
+  });
+  });
+  </script>
+  
+	 <script>
+   $(document).ready(function(){
+      $('#btn_signin').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='login.html';
+      })
+   });
+ </script> 
+	
+	<script>
+   $(document).ready(function(){
+      $('#btn_signup').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='signup.html';
+      })
+   });
+ </script> 
+	
+	<script>
+   $(document).ready(function(){
+      $('#btn_homepage').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='index.html';
+      })
+   });
+ </script> 
+	
+ <script>
+   $(document).ready(function(){
+      $('#btn_article').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='article.html';
+      })
+   });
+ </script> 
+
+	<script>
+   $(document).ready(function(){
+      $('#favourList').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='favourlist.html';
+      })
+   });
+ </script> 
+
+	
+	<body onload="checkLoginStatus()">
+
+		<!-- Header -->
+	
+	<!-- Header -->
+		<div id="header">
+			<div class="container"> 
+		
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Drug Abuse Information</a></h1>
+					<span1 id="name"></span1>
+				</div>
+				
+				<div>
+				
+				<ul>
+					<li id="btn_signin">Sign in</li>
+					<li id="btn_signup">Sign up</li>
+					<li id="logout">Logout</li>
+					<li class="active" id="favourList">Favour List</li>
+				</ul>
+												
+				</div>
+				
+				<!-- Nav -->
+				 
+					<ul>
+						<li id="btn_homepage">Home Page</li>
+						<li id="btn_article">Articles</li>
+					</ul>
+				
+			</div>
+		<!-- Main -->
+		<div id="main">
+			<div class="container">
+				<div class="row"> 
+					
+					<!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+						<section>
+							<header>
+								<h2>Favour List</h2>
+								<span class="byline" ></span>
+
+							</header>
+							<a href="#" class="image full"><img src="images/pill1.jpg" alt="" /></a>
+              <div class="btnclearside"><btn2 id="clear">Clear all</btn2></div>
+							<div class="center">
+
+									<table id="mytable">
+									<tr> 
+   								<th><strong>Number</strong></th>
+    							<th><strong>Articles</strong></th>
+									<th><strong> Link	</strong></th>
+									<th><strong> Delete?	</strong></th>
+                  
+  								</tr>
+									 <tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+                     <td class = "tablink" ></td>
+										 <td class = "tabdel"></td>
+										</tr>
+											<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink" ></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										<td class = "tablink" ></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+										<tr>
+										<td class = "tabnum"></td>
+										 <td class = "tabname"></td>
+										 <td class = "tablink"></td>
+											<td class = "tabdel"></td>
+										</tr>
+									</table>
+  								
+						</section>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+			<!-- Footer -->
+		<div id="featured">
+			<div class="container">
+				<div class="row">
+					<div class="4u">
+            <h2>Narcotics Division, Security Bureau</h2></br>
+            <a href="http://www.nd.gov.hk/" class="image full"><img src="images/pic01.jpg" alt="" /></a>
+					  <p><a href="http://www.nd.gov.hk/" class="button">More Details</a></p>
+          </div>
+					<div class="4u">
+						<h2>The Society For The Aid And Rehibilitation Of Drugs Abuses</h2>
+						<a href="http://www.sarda.org.hk/" class="image full"><img src="images/pic02.jpg" alt="" /></a>
+						<p><a href="http://www.sarda.org.hk/" class="button">More Details</a></p>
+					</div>
+					<div class="4u">
+						<h2>Evergreen Lutheran Centre</h2></br></br>
+						<a href="http://evergreen-ccpsa.hklss.hk/" class="image full"><img src="images/pic03.jpg" alt="" /></a>
+						<p><a href="http://evergreen-ccpsa.hklss.hk/" class="button">More Details</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+      
+		<!-- Footer -->
+		<div id="footer">
+			<div class="container">
+				<div class="row">
+					<div class="4u">
+					
+					</div>
+					
+					</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+			</div>
+		</div>
+		
+	</body>
+</html>

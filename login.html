@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<!--
+	Iridium by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/skelnoscript.css" />
+	<link rel="stylesheet" type="text/css" href="css/styledesktop.css" />
+	<link rel="stylesheet" type="text/css" href="css/stylemobile.css" />
+	<link rel="stylesheet" type="text/css" href="css/style1000px.css" />
+	<link rel="stylesheet" type="text/css" href="css/ie/v8.css" />
+	<link rel="stylesheet" type="text/css" href="css/ie/v9.css" />
+	
+		<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script src="js/skel.min.js"></script>
+	<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+
+	
+  <!---<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script>--->
+
+	<script>
+  function checkLoginStatus(){
+		//alert("checkLoginStatus");
+		$.ajax({
+				 url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/checkLoginStatus", 
+         type: 'GET',
+				 async: false,
+				 dataType: 'text',
+				 //jsonpCallback: '_wrapper',
+				 //contentType: 'application/json',        
+				 //dataFilter: function(data) { return data; },
+				 success: function(data){
+				  //alert(data);
+					 if (data !== ""){					  
+					   $('#name').empty().append(data);
+						 $('#btn_signin').hide();
+					   $('#btn_signup').hide()
+					 	 $('#username').attr("disabled", true);
+						 $('#password').attr("disabled", true);
+						 $('#login').attr("disabled", true);
+						 $('#logout').show();
+						 $('#favourList').show();
+					 }else{
+						 $('#username').attr("disabled", false);
+						 $('#password').attr("disabled", false);
+						 $('#login').attr("disabled", false);
+						 $('#btn_signin').show();
+					   $('#btn_signup').show();
+						 $('#logout').hide();
+						 $('#favourList').hide();
+					 }
+				 },
+			  	complete: function () {
+        // Handle the complete event
+          //alert("ajax completed ");
+        },
+				error: function (xhr, textStatus, errorThrown) {
+          alert("error");
+					alert(xhr.responseText);
+					//alert(xhr.d);
+				},	 
+	  });
+	}
+	</script>
+	
+	<script>
+	$(document).ready(function(){
+		$('#logout').click(function(){
+			//alert("clicked logout!");
+			$.ajax({
+				 url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/Logout", 
+         type: 'GET',
+				 async: false,
+				 dataType: 'text',
+				 //jsonpCallback: '_wrapper',
+				 //contentType: 'application/json',        
+				 //dataFilter: function(data) { return data; },
+				 success: function(data){
+				  alert(data);
+					 window.location.href='index.html';
+					$('#name').empty().append("");
+				  $('#username').attr("disabled", false);
+				  $('#password').attr("disabled", false);
+					$('#login').attr("disabled", false);
+					$('#logout').hide();
+					$('#favourList').hide();
+					$('#btn_signin').show();
+				  $('#btn_signup').show();					 
+				 },
+			  	complete: function () {
+        // Handle the complete event
+          //alert("ajax completed ");
+        },
+				error: function (xhr, textStatus, errorThrown) {
+          alert("error");
+					alert(xhr.responseText);
+					//alert(xhr.d);
+				},	 
+	  });
+		});
+	});
+	</script>
+	
+  	<script>
+		var avail = 0;
+			
+		function check(){
+			//Incorrect username or password!
+				var username = document.getElementById("username");
+			  var password = document.getElementById("password");
+			//alert("check");
+			if(username.value == "" || password.value == ""){
+				 document.getElementById("logincheck").innerHTML  = "Please enter username and password!";
+			}else{
+				//alert("fullinput");
+				document.getElementById("logincheck").innerHTML  = "";
+				avail = 1;
+			}		
+		}
+			
+ $(document).ready(function(){  
+		$('#login').click(function(){
+			
+			var mydata=$('#loginfrom').serialize();
+			if (avail == 1){
+			//alert("login");
+			$.ajax({
+				 url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/Login", 
+         type: 'POST',
+				 async: false,
+				 //dataType: 'json',
+				 //jsonpCallback: '_wrapper',
+				 //contentType: 'application/json',
+         data: mydata,
+				 //dataFilter: function(data) { return data; },
+				 success: handleButtonResponse,
+				 error: function (xhr, textStatus, errorThrown) {
+          alert("error");
+					alert(xhr.responseText);
+					//alert(xhr.d);
+				},	 
+			});
+				}
+			//alert("ready to empty text");
+			avail = 0;
+		  document.getElementById("username").value = "";
+			document.getElementById("password").value = "";
+			document.getElementById("resID").value = "";
+			$('#resID').empty();
+			//alert($('#loginfrom').serialize());		
+		});
+		
+
+	 
+		 function handleButtonResponse(data)
+    {
+       //alert("Data = " + data);
+			 //alert(JSON.stringify(data));
+			
+        // parse the json string
+			  
+        var _jsonObj = JSON.stringify(data);
+			  var stringObj = JSON.parse(data);
+         
+		     if(stringObj.Msg === "Username is not exist!"){
+					 alert(stringObj.Msg);
+           $('#resID').append(stringObj.Msg);
+					 $('#resID').empty().append(stringObj.Msg);
+				 }else{	
+					 
+			    if(stringObj.Msg === "Incorrect password!"){
+            alert(stringObj.Msg);
+		    	 $('#resID').empty().append(stringObj.Msg);					
+				  }else{
+					 //alert(stringObj.Msg);
+					 $('#name').empty().append(stringObj.LoginName);
+           window.location.href='index.html';
+				  }
+				 }
+    } 
+ });
+	</script>
+	
+	 <script>
+   $(document).ready(function(){
+      $('#btn_signup').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='signup.html';
+      })
+   });
+ </script> 
+	
+	
+	 <script>
+   $(document).ready(function(){
+      $('#btn_signin').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='login.html';
+      })
+   });
+ </script> 
+	
+		<script>
+   $(document).ready(function(){
+      $('#btn_homepage').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='index.html';
+      })
+   });
+ </script> 
+	
+	 <script>
+   $(document).ready(function(){
+      $('#btn_article').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='article.html';
+      })
+   });
+ </script> 
+	
+		<script>
+   $(document).ready(function(){
+      $('#favourList').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='favourlist.html';
+      })
+   });
+ </script> 
+	
+ <script>
+   $(document).ready(function(){
+      $('#btn_youtube').click(function(){
+        window.location.href='testyoutube.html';
+      })
+   });
+ </script> 
+	
+	
+ <head>
+
+		
+		<title>Sign in</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/1skelmin.js"></script>
+		<script src="js/2skelpanelsmin.js"></script>
+		<script src="js/init.js"></script>
+	  
+		<noscript>
+			<link rel="stylesheet" href="css/skelnoscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/styledesktop.css" />
+			<link rel="stylesheet" href="css/style1000px.css"/>
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body class="no-sideder" onload="checkLoginStatus()">
+	
+		
+
+		<!-- Header -->
+		<div id="header">
+			<div class="container"> 
+		
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Drug Abuse Information</a></h1>
+					<span1  id="name"></span1>
+				</div>
+
+				<div>		
+				<ul>
+					<li class="active" id="btn_signin">Sign in</li>
+					<li id="btn_signup">Sign up</li>
+					<li id="logout">Logout</li>
+					<li id="favourList">Favour List</li>
+				</ul>									
+				</div>
+				
+				<!-- Nav -->
+				 
+					<ul>
+						<li id="btn_homepage">Home Page</li>
+						<li id="btn_article">Articles</li>
+            <li  id="btn_youtube">Video</li>
+					</ul>
+				
+			</div>
+			
+		</div>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="container">
+				<div class="row"> 
+					
+					<!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+						<section>
+							<header>
+								<h2>Sign in</h2>
+								<span class="byline"></span>
+							</header>
+							<a href="#" class="image full"><img src="images/pic07.jpg" alt="" /></a>
+							<div class="form">
+								<form id="loginfrom">
+                <a2>Username : </a2></br><input id="username" type="text" name="Username" placeholder="Enter your username" value=""/> <a2 type="red" id="resID"></a2></br></br>
+                <a2>Password : </a2></br><input id="password" name="Password" type="password"placeholder="Enter your password" value=""/> </a2> </br>
+                </form>
+		            <a2 type="red" id="logincheck"></a2></br>
+	            	<a2 type="forget">Forget your password?</a2> </br>
+                
+                <btm type="submit" id="login" onClick="check()" >Sign in</btm> 
+                <a2 type="red" id="reponseID"></a2>
+              </div>         
+						</section>
+					</div>
+         </div>
+    		</div>
+			</div>
+				
+		
+
+		<!-- Footer -->
+		<div id="featured">
+			<div class="container">
+				<div class="row">
+					<div class="4u">
+						<h2>Aenean elementum facilisis</h2>
+						<a href="#" class="image full"><img src="images/pic01.jpg" alt="" /></a>
+						<p>Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Quisque dictum. Pellentesque viverra vulputate enim.</p>
+						<p><a href="#" class="button">More Details</a></p>
+					</div>
+					<div class="4u">
+						<h2>Fusce ultrices fringilla</h2>
+						<a href="#" class="image full"><img src="images/pic02.jpg" alt="" /></a>
+						<p>Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Quisque dictum. Pellentesque viverra vulputate enim.</p>
+						<p><a href="#" class="button">More Details</a></p>
+					</div>
+					<div class="4u">
+						<h2>Etiam rhoncus volutpat erat</h2>
+						<a href="#" class="image full"><img src="images/pic03.jpg" alt="" /></a>
+						<p>Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Quisque dictum. Pellentesque viverra vulputate enim.</p>
+						<p><a href="#" class="button">More Details</a></p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Footer -->
+		<div id="footer">
+			<div class="container">
+				<div class="row">
+					<div class="4u">
+						<section>
+							<h2>Latest Posts</h2>
+							<ul class="default">
+								<li><a href="#">Pellentesque lectus gravida blandit</a></li>
+								<li><a href="#">Lorem ipsum consectetuer adipiscing</a></li>
+								<li><a href="#">Phasellus nibh pellentesque congue</a></li>
+								<li><a href="#">Cras vitae metus aliquam pharetra</a></li>
+								<li><a href="#">Maecenas vitae orci feugiat eleifend</a></li>
+							</ul>
+						</section>
+					</div>
+					<div class="4u">
+						<section>
+							<h2>Ultrices fringilla</h2>
+							<ul class="default">
+								<li><a href="#">Pellentesque lectus gravida blandit</a></li>
+								<li><a href="#">Lorem ipsum consectetuer adipiscing</a></li>
+								<li><a href="#">Phasellus nibh pellentesque congue</a></li>
+								<li><a href="#">Cras vitae metus aliquam pharetra</a></li>
+								<li><a href="#">Maecenas vitae orci feugiat eleifend</a></li>
+							</ul>
+						</section>
+					</div>
+					<div class="4u">
+						<section>
+							<h2>Aenean elementum</h2>
+							<ul class="default">
+								<li><a href="#">Pellentesque lectus gravida blandit</a></li>
+								<li><a href="#">Lorem ipsum consectetuer adipiscing</a></li>
+								<li><a href="#">Phasellus nibh pellentesque congue</a></li>
+								<li><a href="#">Cras vitae metus aliquam pharetra</a></li>
+								<li><a href="#">Maecenas vitae orci feugiat eleifend</a></li>
+							</ul>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+			</div>
+		</div>
+		
+	</body>
+</html>

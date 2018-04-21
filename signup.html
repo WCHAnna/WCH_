@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<!--
+	Iridium by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+
+<html>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/skelnoscript.css" />
+	<link rel="stylesheet" type="text/css" href="css/styledesktop.css" />
+	<link rel="stylesheet" type="text/css" href="css/stylemobile.css" />
+	<link rel="stylesheet" type="text/css" href="css/style1000px.css" />
+	<link rel="stylesheet" type="text/css" href="css/ie/v8.css" />
+	<link rel="stylesheet" type="text/css" href="css/ie/v9.css" />
+	
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/A9FB4D37-939B-0747-999D-86DE063F326E/main.js" charset="UTF-8"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+	
+
+	<script>
+  function checkLoginStatus(){
+		//alert("checkLoginStatus");
+		$.ajax({
+				 url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/checkLoginStatus", 
+         type: 'GET',
+				 async: false,
+				 dataType: 'text',
+				 success: function(data){;
+					 if (data !== ""){					  
+					   $('#name').empty().append(data);
+						 $('#btn_signin').hide();
+					   $('#btn_signup').hide()
+						 $('#logout').show();
+						 $('#favourList').show();
+					 }else{
+						 $('#btn_signin').show();
+						 $('#btn_signup').show();
+						 $('#logout').hide();
+						 $('#favourList').hide();
+					 }
+				 },
+				error: function (xhr, textStatus, errorThrown) {
+          alert("error");
+					alert(xhr.responseText);
+				},	 
+	  });
+	}
+	</script>
+	
+	
+	<script>
+	$(document).ready(function(){
+		$('#logout').click(function(){
+			//alert("clicked logout!");
+			$.ajax({
+				 url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/Logout", 
+         type: 'GET',
+				 async: false,
+				 dataType: 'text',
+				 //jsonpCallback: '_wrapper',
+				 //contentType: 'application/json',        
+				 //dataFilter: function(data) { return data; },
+				 success: function(data){
+				  alert(data);
+					$('#name').empty().append("");
+
+					$('#logout').hide();
+					$('#favourList').hide();
+					$('#btn_signin').show();
+				  $('#btn_signup').show();
+				 },
+			  	complete: function () {
+        // Handle the complete event
+          //alert("ajax completed ");
+        },
+				error: function (xhr, textStatus, errorThrown) {
+          alert("error");
+					alert(xhr.responseText);
+					//alert(xhr.d);
+				},	 
+	  });
+		});
+	});
+	</script>
+	
+	
+	<script>	
+		var avail = 0;
+		
+		function check(){
+			avail = 0;
+			var username = document.getElementById("username");
+			var emailORphone = document.getElementById("emailphone");
+      var password1 = document.getElementById("password1");
+      var password2 = document.getElementById("password2"); 
+
+			if (password1.value != password2.value && password1.value != null && password2.value != null){
+         document.getElementById("passwordcheck").innerHTML  = "Different password!";
+      }else{
+			   document.getElementById("passwordcheck").innerHTML  = "";
+        if (password1.value == "" || password2.value == ""){
+         document.getElementById("passwordcheck").innerHTML  = "Please enter password!";
+      }else{
+				if (password1.value.length < 6){
+				 document.getElementById("passwordcheck").innerHTML  = "Password need to input at least 6 words!";
+				}else{
+				   document.getElementById("passwordcheck").innerHTML  = "";
+					 avail++;
+					//alert("password value : " + avail);
+			 		  }
+         }
+			}
+		
+		if(emailORphone.value == ""){
+				document.getElementById("emailphonecheck").innerHTML  = "Please enter email or phone num!";
+			}else if (emailORphone.value.includes('.com') || emailORphone.value.includes('@')){ 
+				if (emailORphone.value.includes('.com') == false && emailORphone.value.includes('@')){
+					 document.getElementById("emailphonecheck").innerHTML  = "Invailable email";     
+				}else if (emailORphone.value.includes('.com') && emailORphone.value.includes('@')  == false ){
+				   document.getElementById("emailphonecheck").innerHTML  = "Invailable email"; 
+				}else{
+						document.getElementById("emailphonecheck").innerHTML  = "";
+					  avail++;
+				}			
+			}else if (emailORphone.value.length != 8){
+           document.getElementById("emailphonecheck").innerHTML  = "Invailable phone number!";
+          }else{
+						document.getElementById("emailphonecheck").innerHTML  = "";
+					   avail++;
+				  }
+      
+			 if (username.value == ""){
+        document.getElementById("usernamecheck").innerHTML  = "Please input your name!";
+      }else{
+				if (username.value.length < 4){
+				document.getElementById("usernamecheck").innerHTML = "username should be more than 3 words!";
+			}else{
+				document.getElementById("usernamecheck").innerHTML  = "";
+					 avail++;
+					 //alert("username value : " + avail);
+					}
+			}
+		}
+
+  $(document).ready(function(){  
+		$('#signUp').click(function(){
+			//alert("avail = " + avail);
+			if (avail == 3){
+			//alert("signuping");
+			$.ajax({
+				 url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/Signup", 
+         type: 'POST',
+				 async: false,
+				 dataType: 'text',
+         data: $('#formID').serialize(),			 
+				 success: handleButtonResponse,
+				 error: function (xhr, textStatus, errorThrown) {
+           //alert(textStatus);
+					 //alert(xhr.responseText);
+				},	 
+			});
+			}
+			document.getElementById("password1").value  = "";
+			document.getElementById("password2").value  = "";
+			document.getElementById("emailphone").value  = "";
+		  document.getElementById("username").value  = "";
+		});
+		
+		 function handleButtonResponse(data)
+    {
+      //alert("From server : " + data);
+			
+			switch(data){
+				case "Username is existed!":
+					alert(data);
+					break;
+				case  "Phone or Email is existed!":
+					alert(data);
+					break;
+				case "Existed username!":
+					alert(data);
+					break;
+				case "Existed Email OR Phone number!":
+					alert(data);
+					break;
+					
+				case "Sign up successfully!":
+					alert(data + "  Please sign in");
+		      window.location.href = 'login.html';  
+					break;
+			}		    
+    }
+	
+				
+		 $("#searchall").click(function(){
+    alert("searching all");
+    $.ajax(
+    {
+      url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/SearchAll", 
+      type: 'POST',
+			 success: function(){
+				 alert("success searching");
+			 },
+			error: function (xhr, textStatus, errorThrown) {
+        //  alert(textStatus);
+			//	alert(xhr.responseText);
+       //   console.log(textStatus);
+				},	 
+    });
+  });
+		
+		 $("#clear").click(function(){
+    alert("Delete all");
+    $.ajax(
+    {
+      url: "http://port-9001.Web-anna20708743601504.codeanyapp.com/Clear", 
+      type: 'POST',
+			 success: function(){
+				 alert("success clear");
+			 },
+			error: function (xhr, textStatus, errorThrown) {
+        //  alert(textStatus);
+				 // alert(xhr.responseText);
+         // console.log(textStatus);
+				},	 
+    });
+  });
+		
+	 });
+	
+	</script>
+
+	 <script>
+   $(document).ready(function(){
+      $('#btn_signin').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='login.html';
+      })
+   });
+ </script> 
+	
+	<script>
+   $(document).ready(function(){
+      $('#btn_signup').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='signup.html';
+      })
+   });
+ </script> 
+	
+<script>
+   $(document).ready(function(){
+      $('#btn_homepage').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='index.html';
+      })
+   });
+ </script> 
+	
+		 <script>
+   $(document).ready(function(){
+      $('#btn_article').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='article.html';
+      })
+   });
+ </script> 
+	
+		<script>
+   $(document).ready(function(){
+      $('#favourList').click(function(){
+        //lert("Change page through js, Most important statment");
+        window.location.href='favourlist.html';
+      })
+   });
+ </script> 
+ 
+  <script>
+   $(document).ready(function(){
+      $('#btn_youtube').click(function(){
+        window.location.href='testyoutube.html';
+      })
+   });
+ </script> 
+	
+	<head>	
+		<title>Sign up</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/1skelmin.js"></script>
+		<script src="js/2skelpanelsmin.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body class="no-sideder" onload="checkLoginStatus()">
+
+		<!-- Header -->
+		<div id="header">
+			<div class="container"> 
+		
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Drug Abuse Information</a></h1>
+					<span1 id="name"></span1>
+				</div>
+				
+				<div>
+				
+				<ul>
+					<li  id="btn_signin">Sign in</li>
+					<li class="active" id="btn_signup">Sign up</li>
+					<li id="logout">Logout</li>
+					<li id="favourList">Favour List</li>
+				</ul>
+												
+				</div>
+				
+				<!-- Nav -->
+				<ul>
+						<li id="btn_homepage">Home Page</li>
+						<li id="btn_article">Articles</li>
+            <li id="btn_youtube">Video</li>
+
+					</ul>
+			</div>
+		</div>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="container">
+				<div class="row"> 
+					
+					<!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+						<section>
+							<header>
+								<h2>Sign up</h2>
+								<span class="byline"></span>
+							</header>
+							<a href="#" class="image full"><img src="images/pic07.jpg" alt="" /></a>
+							<div class="form">
+								<form id="formID">
+                <a2>Username : </a2></br><input id="username" type="text" name="Username" placeholder="username should more than 3words" value="" size="30"/> <a2  type="red" id="usernamecheck"></a2> </br></br>
+						    <a2>Email OR Phone num : </a2></br><input id="emailphone" name="EmailorPhone" type="text"placeholder="Your email OR phone num" size="30"/> <a2  type="red" id="emailphonecheck"></a2> </br></br>
+                <a2>Password : </a2></br><input id="password1" name="Password" type="password"placeholder="Password should more than 6words" size="30"/>  <a2 type="red" id="passwordcheck"></a2> </br>
+                </form>
+	              <input id="password2" type="password"placeholder="Enter your password agin" size="30"> </br>
+                <btm type="submit" id="signUp" onClick="check()" >Sign up</btm>   
+                <!--<button id="searchall">Search all user</button>
+                <button id="clear">Delete all user</button>-->
+              </div>
+
+               <div id="reponseID"></div>
+						</section>
+					</div>
+         </div>
+    		</div>
+			</div>
+				
+		
+
+			<!-- Footer -->
+		<div id="featured">
+			<div class="container">
+				<div class="row">
+					<div class="4u">
+            <h2>Narcotics Division, Security Bureau</h2></br>
+            <a href="http://www.nd.gov.hk/" class="image full"><img src="images/pic01.jpg" alt="" /></a>
+					  <p><a href="http://www.nd.gov.hk/" class="button">More Details</a></p>
+          </div>
+					<div class="4u">
+						<h2>The Society For The Aid And Rehibilitation Of Drugs Abuses</h2>
+						<a href="http://www.sarda.org.hk/" class="image full"><img src="images/pic02.jpg" alt="" /></a>
+						<p><a href="http://www.sarda.org.hk/" class="button">More Details</a></p>
+					</div>
+					<div class="4u">
+						<h2>Evergreen Lutheran Centre</h2></br></br>
+						<a href="http://evergreen-ccpsa.hklss.hk/" class="image full"><img src="images/pic03.jpg" alt="" /></a>
+						<p><a href="http://evergreen-ccpsa.hklss.hk/" class="button">More Details</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+      
+		<!-- Footer -->
+		<div id="footer">
+			<div class="container">
+				<div class="row">
+					<div class="4u">
+					
+					</div>
+					
+					</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+			</div>
+		</div>
+		
+	</body>
+</html>
